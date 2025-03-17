@@ -11,7 +11,9 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "apollo-server": "^3.13.0",
+    "bcryptjs": "^3.0.2",
     "data-loader": "^3.8.22",
     "dotenv": "^16.4.7",
     "graphql": "^16.10.0",

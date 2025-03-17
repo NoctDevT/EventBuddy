@@ -1,26 +1,35 @@
-{
-  "development": {
-    "username": "eventbuddy",
-    "password": "secret",
-    "database": "eventbuddy_db",
-    "host": "localhost",   
-    "port": 5432,
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "eventbuddy",
-    "password": "secret",
-    "database": "eventbuddy_db_test",
-    "host": "localhost",
-    "port": 5432,
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "eventbuddy",
-    "password": "secret",
-    "database": "eventbuddy_db",
-    "host": "localhost",
-    "port": 5432,
-    "dialect": "postgres"
-  }
-}
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    container_name: eventbuddy_db
+    restart: always
+    environment:
+      POSTGRES_USER: eventbuddy
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: eventbuddy_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend  
+      dockerfile: .dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: eventbuddy
+      DB_PASSWORD: secret
+      DB_NAME: eventbuddy_db
+    ports:
+      - '4000:4000'
+    working_dir: /app
+    command: ["npm", "run", "dev"] 
+
+
+volumes:
+  db_data:

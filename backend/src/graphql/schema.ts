@@ -6,14 +6,14 @@ export const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
     name: "RootQuery",
     fields: {
-      ...eventResolvers,
+      ...eventResolvers.Query,
       ...userResolvers.Query,
     },
   }),
   mutation: new GraphQLObjectType({
     name: "RootMutation",
     fields: {
-        ...eventResolvers,
+        ...eventResolvers.Mutation,
         ...userResolvers.Mutation 
     },
   }),

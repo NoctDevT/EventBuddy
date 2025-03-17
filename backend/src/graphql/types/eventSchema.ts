@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLInt } from "graphql";
 
 export const EventType = new GraphQLObjectType({
   name: "Event",
@@ -7,6 +7,7 @@ export const EventType = new GraphQLObjectType({
     title: { type: new GraphQLNonNull(GraphQLString) },
     date: { type: new GraphQLNonNull(GraphQLString) },
     location: { type: GraphQLString },
+    capacity: {type: GraphQLInt},
     description: { type: GraphQLString },
   },
 });
